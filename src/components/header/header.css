@@ -1,3 +1,12 @@
+:root {
+  --z-fixed: 10;
+  --header-height: 3rem;
+  --font-medium: 500;
+  --small-font-size: 1rem;
+  --title-color-dark: #000;
+  --body-color: #f7f7f7;
+}
+
 .header {
   width: 100%;
   position: fixed;
@@ -5,6 +14,12 @@
   left: 0;
   z-index: var(--z-fixed);
   background-color: #2c04c5;
+  color: #f7f7f7;
+}
+
+.header--white {
+  background-color: white;
+  color: #333;
 }
 
 .nav {
@@ -21,6 +36,10 @@
   font-weight: var(--font-medium);
 }
 
+.nav__logo {
+  color: inherit;
+}
+
 .nav__list {
   display: flex;
   column-gap: 2rem;
@@ -31,7 +50,7 @@
   flex-direction: column;
   align-items: center;
   font-size: var(--small-font-size);
-  color: white;
+  color: inherit;
   font-weight: var(--font-medium);
   transition: 0.3s;
 }
@@ -46,6 +65,16 @@
 .active-link,
 .nav__link:hover {
   color: var(--title-color-dark);
+}
+
+/* Logout button styling */
+.nav__link--button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
 }
 
 /* BREAKPOINTS */
@@ -71,7 +100,7 @@
     transition: 0.3s;
   }
 
-  /*Show menu*/
+  /* Show menu */
   .show-menu {
     bottom: 0;
   }

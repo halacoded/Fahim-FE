@@ -1,0 +1,25 @@
+.major-detail {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.courses-list {
+  list-style: none;
+  padding: 0;
+}
+
+.courses-list li {
+  margin-bottom: 1rem;
+}
+
+.message {
+  margin-top: 1rem;
+  color: green;
+  font-size: 1rem;
+}
+
+button {
+  margin-right: 10px;
+}
