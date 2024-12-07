@@ -75,25 +75,54 @@ const UserMajorDetail = () => {
   if (userLoading || majorLoading) return <div>Loading...</div>;
   if (userError || majorError) return <div>Error fetching details.</div>;
 
+  const createCourseElement = (course) => (
+    <li key={course._id}>
+      <input
+        type="checkbox"
+        value={course._id}
+        onChange={() => handleCourseSelection(course._id)}
+        checked={selectedCourses.includes(course._id)}
+      />
+      <a href="#">{course.name}</a>
+    </li>
+  );
+
+  const renderCourses = (courses) => {
+    const courseElements = [];
+    const renderedCourses = new Set();
+
+    const addCourseWithPre = (course) => {
+      if (!course || renderedCourses.has(course._id)) return;
+      // Render prerequisites first
+      if (course.pre && Array.isArray(course.pre)) {
+        course.pre.forEach((preId) => {
+          const prereq = courses.find((c) => c._id === preId._id);
+          addCourseWithPre(prereq);
+        });
+      }
+      // Render the course
+      courseElements.push(createCourseElement(course));
+      renderedCourses.add(course._id);
+    };
+
+    courses.forEach((course) => {
+      addCourseWithPre(course);
+    });
+
+    return courseElements;
+  };
+
   return (
     <div className="major-detail">
       <h2>{major.name}</h2>
       <p>Credits: {major.credits}</p>
       <p>Year: {major.year}</p>
-      <h3>Courses</h3>
-      <ul className="courses-list">
-        {major.courses.map((course) => (
-          <li key={course._id}>
-            <input
-              type="checkbox"
-              value={course._id}
-              onChange={() => handleCourseSelection(course._id)}
-              checked={selectedCourses.includes(course._id)}
-            />
-            {course.name}
-          </li>
-        ))}
-      </ul>
+      <h3>Courses Flowchart</h3>
+      <div className="flowchart">
+        <div className="nav">
+          <ul>{renderCourses(major.courses)}</ul>
+        </div>
+      </div>
       <button
         onClick={handleAddCourses}
         disabled={addCoursesMutation.isLoading}

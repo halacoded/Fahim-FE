@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 .home__content {
-  padding-top: 8rem;
+  padding-top: 3rem;
   align-items: center;
   color: white;
 }
@@ -42,7 +42,4 @@
 .home__button:hover {
   background-color: #ddd;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-html {
-  scroll-behavior: smooth;
 }
